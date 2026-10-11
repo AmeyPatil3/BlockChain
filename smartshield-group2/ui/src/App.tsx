@@ -114,6 +114,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'graph' | 'simulation' | 'ai' | 'report'>('graph');
   const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'success' | 'error'>('idle');
   const [syncError, setSyncError] = useState<string | null>(null);
+  const [customGroup1Url, setCustomGroup1Url] = useState('');
 
   // Gemini API key state & modal
   const [geminiKeyPreview, setGeminiKeyPreview] = useState<string | null>(null);
@@ -300,20 +301,21 @@ export default function App() {
   };
 
   // Sync live analysis from Group 1 via Group 2 backend proxy (avoids browser CORS restriction)
-  const handleSyncGroup1 = async () => {
+  const handleSyncGroup1 = async (overrideUrl?: string) => {
     setLoading(true);
     setSyncStatus('syncing');
+    const targetUrl = overrideUrl || (customGroup1Url.trim() ? customGroup1Url.trim() : undefined);
     try {
       const res = await fetch('/api/ingest-from-group1', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ group1Url: 'http://localhost:3000' }),
+        body: JSON.stringify(targetUrl ? { group1Url: targetUrl } : {}),
       });
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         setSyncStatus('error');
-        setSyncError(errData.error || `HTTP ${res.status} — Group 1 may not be running on port 3000.`);
+        setSyncError(errData.error || `HTTP ${res.status} — Group 1 is unreachable.`);
         return;
       }
 
@@ -433,13 +435,30 @@ export default function App() {
 
       {/* Sync Error / Success Banner */}
       {syncStatus === 'error' && syncError && (
-        <div className="px-6 py-2.5 bg-red-950/80 border-b border-red-500/30 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-xs text-red-200">
-            <span className="text-red-400 font-bold">⚠ Group 1 Sync Error:</span>
-            <span>{syncError}</span>
-            <span className="text-red-400/60">— Make sure Group 1 is running: <code className="font-mono text-red-300">cd SmartShield && npm start</code></span>
+        <div className="px-6 py-3 bg-red-950/90 border-b border-red-500/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
+          <div className="flex flex-col gap-1.5 text-xs text-red-200">
+            <div className="flex items-center gap-2">
+              <span className="text-red-400 font-bold">⚠ Group 1 Sync:</span>
+              <span>{syncError}</span>
+            </div>
+            <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+              <span className="text-slate-300 text-[11px]">Connect to Group 1 URL:</span>
+              <input
+                type="text"
+                placeholder="https://smartshield-group1.onrender.com"
+                value={customGroup1Url}
+                onChange={(e) => setCustomGroup1Url(e.target.value)}
+                className="px-2.5 py-1 rounded-md bg-black/70 border border-white/20 text-white font-mono text-[11px] w-80 focus:outline-none focus:border-red-400"
+              />
+              <button
+                onClick={() => handleSyncGroup1(customGroup1Url)}
+                className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-500 text-white font-semibold text-xs transition-all shadow"
+              >
+                Sync Now
+              </button>
+            </div>
           </div>
-          <button onClick={() => { setSyncStatus('idle'); setSyncError(null); }} className="text-red-400 hover:text-red-200 text-xs font-bold flex-shrink-0">✕ Dismiss</button>
+          <button onClick={() => { setSyncStatus('idle'); setSyncError(null); }} className="text-red-400 hover:text-red-200 text-xs font-bold flex-shrink-0 self-start md:self-auto">✕ Dismiss</button>
         </div>
       )}
       {syncStatus === 'success' && (

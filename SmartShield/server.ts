@@ -15,6 +15,10 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+import { AnalyzerService } from './src/analyzer/index.ts';
+import { DEMO_CONTRACTS } from './src/analyzer/examples/demoContracts.ts';
+import { analysisStore } from './src/backend/store.ts';
+
 async function startServer() {
   const app = express();
   const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
@@ -47,6 +51,19 @@ async function startServer() {
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
     });
+  }
+
+  // Pre-seed benchmark analysis on startup so Group 2 can immediately sync candidate paths
+  try {
+    const demo = DEMO_CONTRACTS.find((d) => d.id === 'vulnerable-owner') || DEMO_CONTRACTS[1];
+    if (demo) {
+      const res = AnalyzerService.analyze({ sources: demo.sources, compilerVersion: demo.compilerVersion });
+      analysisStore.setResult('default-init', res);
+      analysisStore.setSource(demo.sources[0].content, demo.sources[0].filename);
+      console.log(`[SmartShield] Pre-seeded candidate paths for initial sync (${demo.name})`);
+    }
+  } catch (seedErr: any) {
+    console.warn('[SmartShield] Seed analysis warning:', seedErr.message);
   }
 
   app.listen(PORT, '0.0.0.0', () => {

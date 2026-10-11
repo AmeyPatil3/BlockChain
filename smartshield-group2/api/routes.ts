@@ -31,8 +31,13 @@ group2Router.get('/health', (req, res) => {
 // Automatically pulls Section 35 package from Group 1 (port 3000) and executes validation
 group2Router.post('/ingest-from-group1', async (req, res) => {
   try {
-    const defaultG1Url = process.env.GROUP1_URL || 'http://localhost:3000';
-    const { group1Url = defaultG1Url, analysisId, solidity_source } = req.body;
+    const envUrl = process.env.GROUP1_URL;
+    let targetG1Url = req.body.group1Url;
+    if (!targetG1Url || (targetG1Url === 'http://localhost:3000' && envUrl)) {
+      targetG1Url = envUrl || 'http://localhost:3000';
+    }
+    const group1Url = targetG1Url.replace(/\/$/, '');
+    const { analysisId, solidity_source } = req.body;
 
     let candidatePaths: CandidateAttackPath[] = [];
     let solSource = solidity_source;
@@ -55,7 +60,7 @@ group2Router.post('/ingest-from-group1', async (req, res) => {
 
     if (candidatePaths.length === 0) {
       return res.status(404).json({
-        error: 'No candidate attack paths retrieved from Group 1. Make sure Group 1 is running on port 3000.',
+        error: `Could not retrieve candidate paths from Group 1 at ${group1Url}. Ensure Group 1 is running and GROUP1_URL points to it.`,
       });
     }
 
