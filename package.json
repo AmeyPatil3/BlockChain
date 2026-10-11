@@ -1,0 +1,14 @@
+{
+  "name": "smartshield-root",
+  "version": "1.0.0",
+  "description": "SmartShield Unified Monorepo: Group 1 (Static Analysis) + Group 2 (Dynamic EVM Validation & Simulation)",
+  "private": true,
+  "scripts": {
+    "start": "./start.sh",
+    "dev": "./start.sh",
+    "test": "npm run test:all",
+    "test:g1": "cd SmartShield && npm test",
+    "test:g2": "cd smartshield-group2 && npm test",
+    "test:all": "cd SmartShield && npm test && cd ../smartshield-group2 && npm run test:all"
+  }
+}

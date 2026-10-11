@@ -1,0 +1,6 @@
+{
+  "name": "SmartShield - Delegatecall Attack-Path Search & Static Analysis",
+  "description": "Static analysis and attack-path search platform for Solidity smart contracts, identifying read-write data flow, delegatecalls, sensitive operations, and candidate attack paths.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

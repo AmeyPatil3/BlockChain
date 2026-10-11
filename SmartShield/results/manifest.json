@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "tool": "SmartShield Static Analyzer",
+  "target": "vulnerable_owner.sol",
+  "timestamp": "2026-09-25T09:00:24.542Z",
+  "status": "SUCCESS",
+  "candidate_paths_count": 2,
+  "handoff_notice": "Stage 1 static candidate findings. Stage 2 symbolic validation required."
+}

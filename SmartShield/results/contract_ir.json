@@ -1,0 +1,743 @@
+{
+  "contracts": [
+    {
+      "name": "VulnerableOwnerProxy",
+      "kind": "contract",
+      "inheritance": [],
+      "stateVariables": [
+        {
+          "name": "owner",
+          "type": "address",
+          "visibility": "public",
+          "isConstant": false,
+          "isImmutable": false,
+          "slot": "0",
+          "offset": 0,
+          "bytes": 20,
+          "declarationOrder": 0,
+          "contract": "VulnerableOwnerProxy",
+          "location": {
+            "line": 5,
+            "column": 4,
+            "endLine": 5,
+            "endColumn": 24
+          },
+          "isComplex": false
+        },
+        {
+          "name": "implementation",
+          "type": "address",
+          "visibility": "public",
+          "isConstant": false,
+          "isImmutable": false,
+          "slot": "1",
+          "offset": 0,
+          "bytes": 20,
+          "declarationOrder": 1,
+          "contract": "VulnerableOwnerProxy",
+          "location": {
+            "line": 6,
+            "column": 4,
+            "endLine": 6,
+            "endColumn": 33
+          },
+          "isComplex": false
+        }
+      ],
+      "functions": [
+        {
+          "name": "constructor",
+          "contract": "VulnerableOwnerProxy",
+          "fullSignature": "constructor(address)",
+          "selector": "0x5dfb2aee",
+          "visibility": "default",
+          "mutability": "nonpayable",
+          "modifiers": [],
+          "parameters": [
+            {
+              "name": "_implementation",
+              "type": "address"
+            }
+          ],
+          "returnValues": [],
+          "sourceLocation": {
+            "line": 8,
+            "column": 4,
+            "endLine": 11,
+            "endColumn": 4
+          },
+          "calledFunctions": [],
+          "calledBy": [],
+          "isConstructor": true,
+          "isFallback": false,
+          "isReceive": false,
+          "externalReachability": false,
+          "accessControls": [],
+          "reads": [],
+          "writes": [
+            "owner",
+            "implementation"
+          ]
+        },
+        {
+          "name": "fallback",
+          "contract": "VulnerableOwnerProxy",
+          "fullSignature": "fallback()",
+          "selector": "0xe04778c0",
+          "visibility": "external",
+          "mutability": "payable",
+          "modifiers": [],
+          "parameters": [],
+          "returnValues": [],
+          "sourceLocation": {
+            "line": 13,
+            "column": 4,
+            "endLine": 16,
+            "endColumn": 4
+          },
+          "calledFunctions": [],
+          "calledBy": [],
+          "isConstructor": false,
+          "isFallback": true,
+          "isReceive": false,
+          "externalReachability": true,
+          "accessControls": [],
+          "reads": [],
+          "writes": []
+        },
+        {
+          "name": "execute",
+          "contract": "VulnerableOwnerProxy",
+          "fullSignature": "execute(address,uint256)",
+          "selector": "0x115ead18",
+          "visibility": "public",
+          "mutability": "nonpayable",
+          "modifiers": [],
+          "parameters": [
+            {
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "returnValues": [],
+          "sourceLocation": {
+            "line": 18,
+            "column": 4,
+            "endLine": 21,
+            "endColumn": 4
+          },
+          "calledFunctions": [],
+          "calledBy": [],
+          "isConstructor": false,
+          "isFallback": false,
+          "isReceive": false,
+          "externalReachability": true,
+          "accessControls": [
+            "Caller Check: msg.sender == owner"
+          ],
+          "reads": [
+            "owner"
+          ],
+          "writes": []
+        }
+      ],
+      "modifiers": [],
+      "constructors": [
+        {
+          "name": "constructor",
+          "contract": "VulnerableOwnerProxy",
+          "fullSignature": "constructor(address)",
+          "selector": "0x5dfb2aee",
+          "visibility": "default",
+          "mutability": "nonpayable",
+          "modifiers": [],
+          "parameters": [
+            {
+              "name": "_implementation",
+              "type": "address"
+            }
+          ],
+          "returnValues": [],
+          "sourceLocation": {
+            "line": 8,
+            "column": 4,
+            "endLine": 11,
+            "endColumn": 4
+          },
+          "calledFunctions": [],
+          "calledBy": [],
+          "isConstructor": true,
+          "isFallback": false,
+          "isReceive": false,
+          "externalReachability": false,
+          "accessControls": [],
+          "reads": [],
+          "writes": [
+            "owner",
+            "implementation"
+          ]
+        }
+      ],
+      "fallbackFunctions": [
+        {
+          "name": "fallback",
+          "contract": "VulnerableOwnerProxy",
+          "fullSignature": "fallback()",
+          "selector": "0xe04778c0",
+          "visibility": "external",
+          "mutability": "payable",
+          "modifiers": [],
+          "parameters": [],
+          "returnValues": [],
+          "sourceLocation": {
+            "line": 13,
+            "column": 4,
+            "endLine": 16,
+            "endColumn": 4
+          },
+          "calledFunctions": [],
+          "calledBy": [],
+          "isConstructor": false,
+          "isFallback": true,
+          "isReceive": false,
+          "externalReachability": true,
+          "accessControls": [],
+          "reads": [],
+          "writes": []
+        }
+      ],
+      "receiveFunctions": []
+    },
+    {
+      "name": "Implementation",
+      "kind": "contract",
+      "inheritance": [],
+      "stateVariables": [
+        {
+          "name": "owner",
+          "type": "address",
+          "visibility": "public",
+          "isConstant": false,
+          "isImmutable": false,
+          "slot": "0",
+          "offset": 0,
+          "bytes": 20,
+          "declarationOrder": 0,
+          "contract": "Implementation",
+          "location": {
+            "line": 25,
+            "column": 4,
+            "endLine": 25,
+            "endColumn": 24
+          },
+          "isComplex": false
+        }
+      ],
+      "functions": [
+        {
+          "name": "initialize",
+          "contract": "Implementation",
+          "fullSignature": "initialize(address)",
+          "selector": "0x241bcaca",
+          "visibility": "public",
+          "mutability": "nonpayable",
+          "modifiers": [],
+          "parameters": [
+            {
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "returnValues": [],
+          "sourceLocation": {
+            "line": 27,
+            "column": 4,
+            "endLine": 29,
+            "endColumn": 4
+          },
+          "calledFunctions": [],
+          "calledBy": [],
+          "isConstructor": false,
+          "isFallback": false,
+          "isReceive": false,
+          "externalReachability": true,
+          "accessControls": [],
+          "reads": [],
+          "writes": [
+            "owner"
+          ]
+        }
+      ],
+      "modifiers": [],
+      "constructors": [],
+      "fallbackFunctions": [],
+      "receiveFunctions": []
+    }
+  ],
+  "stateVariables": [
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "public",
+      "isConstant": false,
+      "isImmutable": false,
+      "slot": "0",
+      "offset": 0,
+      "bytes": 20,
+      "declarationOrder": 0,
+      "contract": "VulnerableOwnerProxy",
+      "location": {
+        "line": 5,
+        "column": 4,
+        "endLine": 5,
+        "endColumn": 24
+      },
+      "isComplex": false
+    },
+    {
+      "name": "implementation",
+      "type": "address",
+      "visibility": "public",
+      "isConstant": false,
+      "isImmutable": false,
+      "slot": "1",
+      "offset": 0,
+      "bytes": 20,
+      "declarationOrder": 1,
+      "contract": "VulnerableOwnerProxy",
+      "location": {
+        "line": 6,
+        "column": 4,
+        "endLine": 6,
+        "endColumn": 33
+      },
+      "isComplex": false
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "public",
+      "isConstant": false,
+      "isImmutable": false,
+      "slot": "0",
+      "offset": 0,
+      "bytes": 20,
+      "declarationOrder": 0,
+      "contract": "Implementation",
+      "location": {
+        "line": 25,
+        "column": 4,
+        "endLine": 25,
+        "endColumn": 24
+      },
+      "isComplex": false
+    }
+  ],
+  "functions": [
+    {
+      "name": "constructor",
+      "contract": "VulnerableOwnerProxy",
+      "fullSignature": "constructor(address)",
+      "selector": "0x5dfb2aee",
+      "visibility": "default",
+      "mutability": "nonpayable",
+      "modifiers": [],
+      "parameters": [
+        {
+          "name": "_implementation",
+          "type": "address"
+        }
+      ],
+      "returnValues": [],
+      "sourceLocation": {
+        "line": 8,
+        "column": 4,
+        "endLine": 11,
+        "endColumn": 4
+      },
+      "calledFunctions": [],
+      "calledBy": [],
+      "isConstructor": true,
+      "isFallback": false,
+      "isReceive": false,
+      "externalReachability": false,
+      "accessControls": [],
+      "reads": [],
+      "writes": [
+        "owner",
+        "implementation"
+      ]
+    },
+    {
+      "name": "fallback",
+      "contract": "VulnerableOwnerProxy",
+      "fullSignature": "fallback()",
+      "selector": "0xe04778c0",
+      "visibility": "external",
+      "mutability": "payable",
+      "modifiers": [],
+      "parameters": [],
+      "returnValues": [],
+      "sourceLocation": {
+        "line": 13,
+        "column": 4,
+        "endLine": 16,
+        "endColumn": 4
+      },
+      "calledFunctions": [],
+      "calledBy": [],
+      "isConstructor": false,
+      "isFallback": true,
+      "isReceive": false,
+      "externalReachability": true,
+      "accessControls": [],
+      "reads": [],
+      "writes": []
+    },
+    {
+      "name": "execute",
+      "contract": "VulnerableOwnerProxy",
+      "fullSignature": "execute(address,uint256)",
+      "selector": "0x115ead18",
+      "visibility": "public",
+      "mutability": "nonpayable",
+      "modifiers": [],
+      "parameters": [
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "returnValues": [],
+      "sourceLocation": {
+        "line": 18,
+        "column": 4,
+        "endLine": 21,
+        "endColumn": 4
+      },
+      "calledFunctions": [],
+      "calledBy": [],
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceive": false,
+      "externalReachability": true,
+      "accessControls": [
+        "Caller Check: msg.sender == owner"
+      ],
+      "reads": [
+        "owner"
+      ],
+      "writes": []
+    },
+    {
+      "name": "initialize",
+      "contract": "Implementation",
+      "fullSignature": "initialize(address)",
+      "selector": "0x241bcaca",
+      "visibility": "public",
+      "mutability": "nonpayable",
+      "modifiers": [],
+      "parameters": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "returnValues": [],
+      "sourceLocation": {
+        "line": 27,
+        "column": 4,
+        "endLine": 29,
+        "endColumn": 4
+      },
+      "calledFunctions": [],
+      "calledBy": [],
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceive": false,
+      "externalReachability": true,
+      "accessControls": [],
+      "reads": [],
+      "writes": [
+        "owner"
+      ]
+    }
+  ],
+  "modifiers": [],
+  "calls": [],
+  "delegatecalls": [
+    {
+      "contract": "VulnerableOwnerProxy",
+      "function": "fallback",
+      "sourceLocation": {
+        "line": 14,
+        "column": 27
+      },
+      "targetExpression": "implementation",
+      "targetType": "state_variable",
+      "targetResolved": false,
+      "targetContractName": null,
+      "argumentsSummary": "msg.data"
+    }
+  ],
+  "sensitiveOperations": [
+    {
+      "type": "JUDGMENT_CONDITION",
+      "function": "execute",
+      "contract": "VulnerableOwnerProxy",
+      "variablesUsed": [
+        "owner"
+      ],
+      "condition": "msg.sender == owner",
+      "sourceLocation": {
+        "line": 19,
+        "column": 8
+      },
+      "details": "Gatekeeper condition checked in require(msg.sender == owner)"
+    },
+    {
+      "type": "ETHER_TRANSFER",
+      "function": "execute",
+      "contract": "VulnerableOwnerProxy",
+      "variablesUsed": [
+        "owner"
+      ],
+      "sourceLocation": {
+        "line": 20,
+        "column": 8
+      },
+      "details": "Ether transfer operation: recipient.transfer"
+    }
+  ],
+  "controlFlow": [
+    {
+      "contract": "VulnerableOwnerProxy",
+      "functionName": "constructor",
+      "nodes": [
+        {
+          "id": "VulnerableOwnerProxy_constructor_entry",
+          "type": "entry",
+          "label": "Entry: constructor(address)",
+          "line": 8,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": [
+            "stmt_1"
+          ]
+        },
+        {
+          "id": "stmt_1",
+          "type": "statement",
+          "label": "owner = msg.sender",
+          "line": 9,
+          "variablesRead": [
+            "owner"
+          ],
+          "variablesWritten": [
+            "owner"
+          ],
+          "next": [
+            "stmt_2"
+          ]
+        },
+        {
+          "id": "stmt_2",
+          "type": "statement",
+          "label": "implementation = _implementation",
+          "line": 10,
+          "variablesRead": [
+            "implementation"
+          ],
+          "variablesWritten": [
+            "implementation"
+          ],
+          "next": [
+            "VulnerableOwnerProxy_constructor_exit"
+          ]
+        },
+        {
+          "id": "VulnerableOwnerProxy_constructor_exit",
+          "type": "exit",
+          "label": "Exit: constructor",
+          "line": 11,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": []
+        }
+      ],
+      "entryNodeId": "VulnerableOwnerProxy_constructor_entry"
+    },
+    {
+      "contract": "VulnerableOwnerProxy",
+      "functionName": "fallback",
+      "nodes": [
+        {
+          "id": "VulnerableOwnerProxy_fallback_entry",
+          "type": "entry",
+          "label": "Entry: fallback()",
+          "line": 13,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": [
+            "stmt_1"
+          ]
+        },
+        {
+          "id": "stmt_1",
+          "type": "condition",
+          "label": "require(success, \"Delegatecall failed\")",
+          "line": 15,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": [
+            "VulnerableOwnerProxy_fallback_exit"
+          ]
+        },
+        {
+          "id": "VulnerableOwnerProxy_fallback_exit",
+          "type": "exit",
+          "label": "Exit: fallback",
+          "line": 16,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": []
+        }
+      ],
+      "entryNodeId": "VulnerableOwnerProxy_fallback_entry"
+    },
+    {
+      "contract": "VulnerableOwnerProxy",
+      "functionName": "execute",
+      "nodes": [
+        {
+          "id": "VulnerableOwnerProxy_execute_entry",
+          "type": "entry",
+          "label": "Entry: execute(address,uint256)",
+          "line": 18,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": [
+            "stmt_1"
+          ]
+        },
+        {
+          "id": "stmt_1",
+          "type": "condition",
+          "label": "require(msg.sender == owner, \"Caller is not owner\")",
+          "line": 19,
+          "variablesRead": [
+            "owner"
+          ],
+          "variablesWritten": [],
+          "next": [
+            "stmt_2"
+          ]
+        },
+        {
+          "id": "stmt_2",
+          "type": "sensitive",
+          "label": "recipient.transfer(amount)",
+          "line": 20,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": [
+            "VulnerableOwnerProxy_execute_exit"
+          ]
+        },
+        {
+          "id": "VulnerableOwnerProxy_execute_exit",
+          "type": "exit",
+          "label": "Exit: execute",
+          "line": 21,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": []
+        }
+      ],
+      "entryNodeId": "VulnerableOwnerProxy_execute_entry"
+    },
+    {
+      "contract": "Implementation",
+      "functionName": "initialize",
+      "nodes": [
+        {
+          "id": "Implementation_initialize_entry",
+          "type": "entry",
+          "label": "Entry: initialize(address)",
+          "line": 27,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": [
+            "stmt_1"
+          ]
+        },
+        {
+          "id": "stmt_1",
+          "type": "statement",
+          "label": "owner = newOwner",
+          "line": 28,
+          "variablesRead": [
+            "owner"
+          ],
+          "variablesWritten": [
+            "owner"
+          ],
+          "next": [
+            "Implementation_initialize_exit"
+          ]
+        },
+        {
+          "id": "Implementation_initialize_exit",
+          "type": "exit",
+          "label": "Exit: initialize",
+          "line": 29,
+          "variablesRead": [],
+          "variablesWritten": [],
+          "next": []
+        }
+      ],
+      "entryNodeId": "Implementation_initialize_entry"
+    }
+  ],
+  "storageLayout": [
+    {
+      "name": "owner",
+      "type": "address",
+      "slot": "0",
+      "offset": 0,
+      "bytes": 20,
+      "contract": "VulnerableOwnerProxy",
+      "declarationOrder": 0,
+      "isComplex": false
+    },
+    {
+      "name": "implementation",
+      "type": "address",
+      "slot": "1",
+      "offset": 0,
+      "bytes": 20,
+      "contract": "VulnerableOwnerProxy",
+      "declarationOrder": 1,
+      "isComplex": false
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "slot": "0",
+      "offset": 0,
+      "bytes": 20,
+      "contract": "Implementation",
+      "declarationOrder": 0,
+      "isComplex": false
+    }
+  ],
+  "compilerVersion": "0.8.20"
+}

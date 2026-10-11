@@ -1,0 +1,138 @@
+[
+  {
+    "schema_version": "1.0",
+    "id": "PATH-001",
+    "contract": "VulnerableOwnerProxy",
+    "vulnerability_type": "JUDGMENT_CONDITION",
+    "vulnerabilityType": "JUDGMENT_CONDITION",
+    "status": "CANDIDATE",
+    "validationRequired": true,
+    "entry_point": {
+      "function": "initialize",
+      "source_line": 27
+    },
+    "writer": {
+      "function": "initialize",
+      "variable": "owner",
+      "source_line": 27
+    },
+    "reader": {
+      "function": "execute",
+      "variable": "owner",
+      "source_line": 18
+    },
+    "sink": {
+      "type": "JUDGMENT_CONDITION",
+      "function": "execute",
+      "source_line": 19
+    },
+    "delegatecall": {
+      "function": "fallback",
+      "source_line": 14,
+      "target": "implementation",
+      "target_resolution": "STATE_VARIABLE"
+    },
+    "access_control": {
+      "writer": "PUBLIC",
+      "reader": "PUBLIC"
+    },
+    "evidence": {
+      "reason": "Function initialize writes state variable 'owner'. Function execute evaluates 'owner' in condition/branch check: msg.sender == owner."
+    },
+    "callerContract": "VulnerableOwnerProxy",
+    "calleeContract": "Implementation",
+    "delegatecallLocation": {
+      "function": "fallback",
+      "line": 14,
+      "column": 27
+    },
+    "path": [
+      "initialize",
+      "owner",
+      "execute",
+      "judgment_condition"
+    ],
+    "vulnerabilityVariable": "owner",
+    "writerFunction": "initialize",
+    "readerFunction": "execute",
+    "sensitiveOperation": {
+      "type": "JUDGMENT_CONDITION",
+      "function": "execute"
+    },
+    "storage": {
+      "variable": "owner",
+      "slot": "0",
+      "offset": 0,
+      "confidence": "HIGH"
+    },
+    "reason": "Function initialize writes state variable 'owner'. Function execute evaluates 'owner' in condition/branch check: msg.sender == owner."
+  },
+  {
+    "schema_version": "1.0",
+    "id": "PATH-002",
+    "contract": "VulnerableOwnerProxy",
+    "vulnerability_type": "CURRENCY_SENDING",
+    "vulnerabilityType": "ETHER_TRANSFER",
+    "status": "CANDIDATE",
+    "validationRequired": true,
+    "entry_point": {
+      "function": "initialize",
+      "source_line": 27
+    },
+    "writer": {
+      "function": "initialize",
+      "variable": "owner",
+      "source_line": 27
+    },
+    "reader": {
+      "function": "execute",
+      "variable": "owner",
+      "source_line": 18
+    },
+    "sink": {
+      "type": "ETHER_TRANSFER",
+      "function": "execute",
+      "source_line": 20
+    },
+    "delegatecall": {
+      "function": "fallback",
+      "source_line": 14,
+      "target": "implementation",
+      "target_resolution": "STATE_VARIABLE"
+    },
+    "access_control": {
+      "writer": "PUBLIC",
+      "reader": "PUBLIC"
+    },
+    "evidence": {
+      "reason": "Function initialize writes state variable 'owner'. Function execute reads 'owner' and reaches a sensitive Ether-transfer operation."
+    },
+    "callerContract": "VulnerableOwnerProxy",
+    "calleeContract": "Implementation",
+    "delegatecallLocation": {
+      "function": "fallback",
+      "line": 14,
+      "column": 27
+    },
+    "path": [
+      "initialize",
+      "owner",
+      "execute",
+      "ether_transfer"
+    ],
+    "vulnerabilityVariable": "owner",
+    "writerFunction": "initialize",
+    "readerFunction": "execute",
+    "sensitiveOperation": {
+      "type": "ETHER_TRANSFER",
+      "function": "execute"
+    },
+    "storage": {
+      "variable": "owner",
+      "slot": "0",
+      "offset": 0,
+      "confidence": "HIGH"
+    },
+    "reason": "Function initialize writes state variable 'owner'. Function execute reads 'owner' and reaches a sensitive Ether-transfer operation."
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "owner",
+    "type": "address",
+    "slot": "0",
+    "offset": 0,
+    "bytes": 20,
+    "contract": "VulnerableOwnerProxy",
+    "declarationOrder": 0,
+    "isComplex": false
+  },
+  {
+    "name": "implementation",
+    "type": "address",
+    "slot": "1",
+    "offset": 0,
+    "bytes": 20,
+    "contract": "VulnerableOwnerProxy",
+    "declarationOrder": 1,
+    "isComplex": false
+  },
+  {
+    "name": "owner",
+    "type": "address",
+    "slot": "0",
+    "offset": 0,
+    "bytes": 20,
+    "contract": "Implementation",
+    "declarationOrder": 0,
+    "isComplex": false
+  }
+]

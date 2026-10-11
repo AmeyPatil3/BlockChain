@@ -1,0 +1,15 @@
+[
+  {
+    "contract": "VulnerableOwnerProxy",
+    "function": "fallback",
+    "sourceLocation": {
+      "line": 14,
+      "column": 27
+    },
+    "targetExpression": "implementation",
+    "targetType": "state_variable",
+    "targetResolved": false,
+    "targetContractName": null,
+    "argumentsSummary": "msg.data"
+  }
+]
