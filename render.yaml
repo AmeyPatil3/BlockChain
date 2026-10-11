@@ -1,0 +1,41 @@
+# ==============================================================================
+# Render.com Blueprint Specification: SmartShield Unified Deployment
+# Docs: https://render.com/docs/blueprint-spec
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # Service 1: Group 1 - SmartShield Static Analysis & AST Candidate Path Finder
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: smartshield-group1
+    runtime: node
+    rootDir: SmartShield
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  # ----------------------------------------------------------------------------
+  # Service 2: Group 2 - Dynamic EVM Validator, SMT Solver & Gemini AI Explainer
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: smartshield-group2
+    runtime: node
+    rootDir: smartshield-group2
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Google Gemini API key: entered securely in Render dashboard
+      - key: GEMINI_API_KEY
+        sync: false
+      # Group 1 connection URL (can be set to Group 1's public URL in Render)
+      - key: GROUP1_URL
+        sync: false

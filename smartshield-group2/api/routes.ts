@@ -31,7 +31,8 @@ group2Router.get('/health', (req, res) => {
 // Automatically pulls Section 35 package from Group 1 (port 3000) and executes validation
 group2Router.post('/ingest-from-group1', async (req, res) => {
   try {
-    const { group1Url = 'http://localhost:3000', analysisId, solidity_source } = req.body;
+    const defaultG1Url = process.env.GROUP1_URL || 'http://localhost:3000';
+    const { group1Url = defaultG1Url, analysisId, solidity_source } = req.body;
 
     let candidatePaths: CandidateAttackPath[] = [];
     let solSource = solidity_source;
