@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ShieldAlert, Database, ArrowRight, Zap, CheckCircle2, User, KeyRound, AlertTriangle } from 'lucide-react';
-import { ValidationResult, RuntimeAccess } from '../../../validator/types.ts';
+import { ShieldAlert, Database, ArrowRight, Zap, User, KeyRound } from 'lucide-react';
+import { ValidationResult } from '../../../validator/types.ts';
 
 interface AttackGraphProps {
   validationResult: ValidationResult | null;
@@ -32,7 +32,7 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
       subtitle: 'External msg.sender',
       type: 'actor',
       icon: User,
-      color: 'border-amber-500/50 bg-amber-500/10 text-amber-300',
+      color: 'border-amber-300 bg-amber-50 text-amber-900',
       description: 'External caller initiates unauthorized transaction to proxy contract.',
       evidence: {
         address: '0x2000000000000000000000000000000000000002',
@@ -45,7 +45,7 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
       subtitle: 'Delegatecall Writer',
       type: 'function',
       icon: KeyRound,
-      color: 'border-indigo-500/50 bg-indigo-500/10 text-indigo-300',
+      color: 'border-indigo-300 bg-indigo-50 text-indigo-900',
       description: `Invokes '${writerFunc}' via fallback proxy delegatecall forwarding calldata into implementation context.`,
       evidence: {
         function: writerFunc,
@@ -59,7 +59,7 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
       subtitle: `Mutates ${targetVar}`,
       type: 'storage',
       icon: Database,
-      color: isConfirmed ? 'border-red-500/60 bg-red-500/15 text-red-300' : 'border-slate-700 bg-slate-800 text-slate-400',
+      color: isConfirmed ? 'border-red-300 bg-red-50 text-red-900 font-bold' : 'border-slate-300 bg-slate-100 text-slate-600',
       description: `Intercepted SSTORE opcode modifying storage slot 0x${targetSlot} in proxy storage context.`,
       evidence: writeAccess || {
         operation: 'WRITE',
@@ -73,7 +73,7 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
       subtitle: 'Privileged Reader / Guard',
       type: 'function',
       icon: Zap,
-      color: 'border-purple-500/50 bg-purple-500/10 text-purple-300',
+      color: 'border-purple-300 bg-purple-50 text-purple-900',
       description: `Attacker invokes '${readerFunc}'. The access control check reads modified '${targetVar}' slot.`,
       evidence: {
         function: readerFunc,
@@ -87,7 +87,7 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
       subtitle: `Evaluates ${targetVar}`,
       type: 'storage',
       icon: Database,
-      color: isConfirmed ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300' : 'border-slate-700 bg-slate-800 text-slate-400',
+      color: isConfirmed ? 'border-emerald-300 bg-emerald-50 text-emerald-900' : 'border-slate-300 bg-slate-100 text-slate-600',
       description: `Intercepted SLOAD opcode reading overwritten slot 0x${targetSlot} to check msg.sender == owner.`,
       evidence: readAccess || {
         operation: 'READ',
@@ -101,7 +101,7 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
       subtitle: 'ETH Transfer / Draining',
       type: 'sink',
       icon: ShieldAlert,
-      color: isConfirmed ? 'border-red-500 bg-red-950/40 text-red-200 glow-confirmed' : 'border-slate-700 bg-slate-800 text-slate-400',
+      color: isConfirmed ? 'border-red-400 bg-red-100 text-red-950 font-bold glow-confirmed' : 'border-slate-300 bg-slate-100 text-slate-600',
       description: 'Sensitive sink executed: privileged transfer or selfdestruct reached by unauthorized caller.',
       evidence: {
         operation: candidatePath?.vulnerability_type || 'ETHER_TRANSFER',
@@ -115,20 +115,20 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-bold text-white flex items-center gap-2">
+          <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
             <span>Visual Attack Path Graph</span>
             {isConfirmed && (
-              <span className="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-red-500/20 text-red-400 border border-red-500/30">
+              <span className="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-red-50 text-red-700 border border-red-200">
                 EXPLOITABLE PATH CONFIRMED
               </span>
             )}
           </h3>
-          <p className="text-xs text-slate-400">Click any graph node below to inspect intercepted opcode and storage evidence</p>
+          <p className="text-xs text-slate-500">Click any graph node below to inspect intercepted opcode and storage evidence</p>
         </div>
       </div>
 
       {/* DAG Flow Graph */}
-      <div className="glass-panel p-6 rounded-2xl overflow-x-auto">
+      <div className="glass-panel p-6 rounded-2xl overflow-x-auto shadow-xs bg-white">
         <div className="flex items-center justify-between min-w-[850px] gap-2">
           {nodes.map((node, index) => {
             const Icon = node.icon;
@@ -138,20 +138,20 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
               <React.Fragment key={node.id}>
                 <div
                   onClick={() => setSelectedNode(node)}
-                  className={`cursor-pointer transition-all duration-200 transform hover:-translate-y-1 p-3.5 rounded-xl border flex flex-col items-center text-center w-36 ${node.color} ${
-                    isSelected ? 'ring-2 ring-indigo-400 scale-105' : ''
+                  className={`cursor-pointer transition-all duration-200 transform hover:-translate-y-1 p-3.5 rounded-xl border flex flex-col items-center text-center w-36 shadow-xs ${node.color} ${
+                    isSelected ? 'ring-2 ring-indigo-500 scale-105' : ''
                   }`}
                 >
-                  <div className="p-2 rounded-lg bg-black/30 mb-2">
+                  <div className="p-2 rounded-lg bg-white/80 border border-slate-200/60 mb-2 shadow-xs">
                     <Icon className="w-5 h-5" />
                   </div>
                   <span className="font-semibold text-xs leading-tight">{node.title}</span>
-                  <span className="text-[10px] text-slate-400 mt-1">{node.subtitle}</span>
+                  <span className="text-[10px] text-slate-500 mt-1">{node.subtitle}</span>
                 </div>
 
                 {index < nodes.length - 1 && (
-                  <div className="flex items-center text-slate-600 px-1">
-                    <ArrowRight className="w-4 h-4 text-indigo-400/60 animate-pulse" />
+                  <div className="flex items-center text-slate-400 px-1">
+                    <ArrowRight className="w-4 h-4 text-indigo-500 animate-pulse" />
                   </div>
                 )}
               </React.Fragment>
@@ -162,23 +162,23 @@ export const AttackGraph: React.FC<AttackGraphProps> = ({ validationResult, cand
 
       {/* Evidence Inspection Drawer */}
       {selectedNode && (
-        <div className="glass-card p-4 rounded-xl border border-indigo-500/30 transition-all duration-300">
-          <div className="flex items-center justify-between pb-2 border-b border-white/5">
+        <div className="glass-card p-4 rounded-xl border border-indigo-200 bg-white shadow-md transition-all duration-300">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-200">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">Inspecting Node:</span>
-              <span className="text-sm font-semibold text-white">{selectedNode.title}</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-indigo-700">Inspecting Node:</span>
+              <span className="text-sm font-semibold text-slate-900">{selectedNode.title}</span>
             </div>
             <button
               onClick={() => setSelectedNode(null)}
-              className="text-xs text-slate-400 hover:text-white transition-colors"
+              className="text-xs text-slate-500 hover:text-slate-800 transition-colors font-medium"
             >
               ✕ Close
             </button>
           </div>
-          <p className="text-xs text-slate-300 mt-2">{selectedNode.description}</p>
+          <p className="text-xs text-slate-700 mt-2">{selectedNode.description}</p>
           <div className="mt-3">
-            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Runtime Opcode & State Evidence:</span>
-            <pre className="mt-1 p-2.5 rounded-lg bg-black/40 text-[11px] font-mono text-emerald-400 overflow-x-auto border border-white/5">
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Runtime Opcode & State Evidence:</span>
+            <pre className="mt-1 p-2.5 rounded-lg bg-slate-900 text-[11px] font-mono text-emerald-300 overflow-x-auto border border-slate-800">
               {JSON.stringify(selectedNode.evidence, null, 2)}
             </pre>
           </div>

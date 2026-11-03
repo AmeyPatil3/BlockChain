@@ -371,21 +371,21 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
       {/* Top Navbar */}
-      <header className="border-b border-white/10 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between">
+      <header className="border-b border-slate-200 bg-white/95 backdrop-blur-md sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/30">
+          <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200 shadow-xs">
             <Shield className="w-5 h-5 text-indigo-400" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="font-extrabold text-base tracking-tight text-white">SmartShield</h1>
-              <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              <h1 className="font-extrabold text-base tracking-tight text-slate-900">SmartShield</h1>
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
                 GROUP 2 VALIDATOR
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">Dynamic EVM Opcode Validation, Controlled Simulation & AI Explanation</p>
+            <p className="text-[11px] text-slate-500">Dynamic EVM Opcode Validation, Controlled Simulation & AI Explanation</p>
           </div>
         </div>
 
@@ -395,39 +395,39 @@ export default function App() {
             disabled={loading || syncStatus === 'syncing'}
             title="Fetch candidate paths from Group 1 static analysis server (port 3000) via server-side proxy"
             className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg font-semibold transition-all border ${syncStatus === 'success'
-                ? 'bg-emerald-600/30 border-emerald-500/50 text-emerald-200'
+                ? 'bg-emerald-50 border-emerald-300 text-emerald-800 shadow-xs'
                 : syncStatus === 'error'
-                  ? 'bg-red-600/30 border-red-500/50 text-red-200'
-                  : 'bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-200 border-indigo-500/40'
+                  ? 'bg-red-50 border-red-300 text-red-800 shadow-xs'
+                  : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border-indigo-200 shadow-xs'
               }`}
           >
             <RefreshCw className={`w-3.5 h-3.5 ${syncStatus === 'syncing' ? 'animate-spin' : ''}`} />
             {syncStatus === 'syncing' ? 'Syncing…' : syncStatus === 'success' ? '✓ Synced from Group 1' : syncStatus === 'error' ? '✗ Sync Failed' : 'Sync from Group 1 (Port 3000)'}
           </button>
-          <div className="flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg bg-black/40 border border-white/5">
+          <div className="flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-slate-400">Compiler:</span>
-            <span className="font-mono text-emerald-300 font-semibold">solc 0.8.37 (Wasm)</span>
+            <span className="font-mono text-emerald-700 font-semibold">solc 0.8.37 (Wasm)</span>
           </div>
-          <div className="flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg bg-black/40 border border-white/5">
+          <div className="flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 shadow-xs">
             <Layers className="w-3.5 h-3.5 text-indigo-400" />
             <span className="text-slate-400">SMT Engine:</span>
-            <span className="font-mono text-indigo-300 font-semibold">Microsoft Z3</span>
+            <span className="font-mono text-indigo-700 font-semibold">Microsoft Z3</span>
           </div>
           <button
             onClick={() => setShowKeyModal(true)}
             title="Configure Google Gemini API Key for live AI explanations and audit report enrichment"
-            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-amber-950/30 hover:bg-amber-950/50 border border-amber-500/30 text-amber-200 transition-all font-semibold"
+            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 transition-all font-semibold shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span>Gemini AI:</span>
             {geminiKeyPreview ? (
-              <span className="font-mono text-emerald-300 text-[11px] font-semibold flex items-center gap-1.5">
+              <span className="font-mono text-emerald-700 text-[11px] font-semibold flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Active
               </span>
             ) : (
-              <span className="text-amber-400/80 text-[11px]">Set API Key</span>
+              <span className="text-amber-700 text-[11px]">Set API Key</span>
             )}
           </button>
         </div>
@@ -435,20 +435,20 @@ export default function App() {
 
       {/* Sync Error / Success Banner */}
       {syncStatus === 'error' && syncError && (
-        <div className="px-6 py-3 bg-red-950/90 border-b border-red-500/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
-          <div className="flex flex-col gap-1.5 text-xs text-red-200">
+        <div className="px-6 py-3 bg-red-50 border-b border-red-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-xs">
+          <div className="flex flex-col gap-1.5 text-xs text-red-800">
             <div className="flex items-center gap-2">
-              <span className="text-red-400 font-bold">⚠ Group 1 Sync:</span>
+              <span className="text-red-600 font-bold">⚠ Group 1 Sync:</span>
               <span>{syncError}</span>
             </div>
             <div className="flex items-center gap-2 mt-0.5 flex-wrap">
-              <span className="text-slate-300 text-[11px]">Connect to Group 1 URL:</span>
+              <span className="text-slate-600 text-[11px]">Connect to Group 1 URL:</span>
               <input
                 type="text"
                 placeholder="https://smartshield-group1.onrender.com"
                 value={customGroup1Url}
                 onChange={(e) => setCustomGroup1Url(e.target.value)}
-                className="px-2.5 py-1 rounded-md bg-black/70 border border-white/20 text-white font-mono text-[11px] w-80 focus:outline-none focus:border-red-400"
+                className="px-2.5 py-1 rounded-md bg-white border border-red-200 text-slate-900 font-mono text-[11px] w-80 focus:outline-none focus:border-red-400"
               />
               <button
                 onClick={() => handleSyncGroup1(customGroup1Url)}
@@ -458,13 +458,13 @@ export default function App() {
               </button>
             </div>
           </div>
-          <button onClick={() => { setSyncStatus('idle'); setSyncError(null); }} className="text-red-400 hover:text-red-200 text-xs font-bold flex-shrink-0 self-start md:self-auto">✕ Dismiss</button>
+          <button onClick={() => { setSyncStatus('idle'); setSyncError(null); }} className="text-red-600 hover:text-red-800 text-xs font-bold flex-shrink-0 self-start md:self-auto">✕ Dismiss</button>
         </div>
       )}
       {syncStatus === 'success' && (
-        <div className="px-6 py-2 bg-emerald-950/70 border-b border-emerald-500/20 flex items-center justify-between gap-3">
-          <span className="text-xs text-emerald-300">✓ Candidate path successfully imported from Group 1 and validated by Group 2 EVM engine.</span>
-          <button onClick={() => setSyncStatus('idle')} className="text-emerald-500 hover:text-emerald-200 text-xs font-bold flex-shrink-0">✕</button>
+        <div className="px-6 py-2 bg-emerald-50 border-b border-emerald-200 flex items-center justify-between gap-3 shadow-xs">
+          <span className="text-xs text-emerald-700">✓ Candidate path successfully imported from Group 1 and validated by Group 2 EVM engine.</span>
+          <button onClick={() => setSyncStatus('idle')} className="text-emerald-700 hover:text-emerald-900 text-xs font-bold flex-shrink-0">✕</button>
         </div>
       )}
 
@@ -475,14 +475,14 @@ export default function App() {
           {/* Contract Selector: Synced Contract & Reference Benchmarks */}
           <div className="glass-panel p-4 rounded-2xl space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Target Contract</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Target Contract</span>
               {syncedPackage ? (
-                <span className="inline-flex items-center gap-1.5 text-[10px] text-cyan-300 bg-cyan-950/70 border border-cyan-500/40 px-2.5 py-0.5 rounded-full font-semibold">
+                <span className="inline-flex items-center gap-1.5 text-[10px] text-cyan-300 bg-cyan-50 border border-cyan-200 px-2.5 py-0.5 rounded-full font-semibold text-cyan-800">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                   Synced from Port 3000
                 </span>
               ) : (
-                <span className="text-[10px] text-indigo-400">Reference Benchmarks</span>
+                <span className="text-[10px] text-indigo-600">Reference Benchmarks</span>
               )}
             </div>
 
@@ -492,14 +492,14 @@ export default function App() {
                 onClick={() => handleSelectMode('synced')}
                 className={`w-full p-3 rounded-xl text-xs font-semibold text-left transition-all border ${contractMode === 'synced'
                     ? 'bg-cyan-600/90 text-white border-cyan-400 shadow-lg shadow-cyan-600/30 ring-1 ring-cyan-400'
-                    : 'bg-cyan-950/40 text-cyan-200 border-cyan-500/30 hover:bg-cyan-900/50'
+                    : 'bg-cyan-50 text-cyan-900 border-cyan-200 hover:bg-cyan-100 shadow-xs'
                   }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="flex items-center gap-1.5 font-bold text-sm">
                     ⚡ {syncedPackage.filename}
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/50 border border-cyan-400/40 text-cyan-300 font-mono">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-white border border-cyan-200 text-cyan-800 font-mono">
                     {syncedPackage.results.length} candidate path{syncedPackage.results.length > 1 ? 's' : ''}
                   </span>
                 </div>
@@ -515,7 +515,7 @@ export default function App() {
                 onClick={() => handleSelectMode('vulnerable')}
                 className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition-all border ${contractMode === 'vulnerable'
                     ? 'bg-indigo-600 text-white border-indigo-400 shadow-lg shadow-indigo-600/30 ring-1 ring-indigo-400'
-                    : 'bg-black/30 text-slate-300 border-white/5 hover:border-white/20'
+                    : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 shadow-xs'
                   }`}
               >
                 🚨 Vulnerable Proxy
@@ -525,7 +525,7 @@ export default function App() {
                 onClick={() => handleSelectMode('safe')}
                 className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition-all border ${contractMode === 'safe'
                     ? 'bg-emerald-600 text-white border-emerald-400 shadow-lg shadow-emerald-600/30 ring-1 ring-emerald-400'
-                    : 'bg-black/30 text-slate-300 border-white/5 hover:border-white/20'
+                    : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 shadow-xs'
                   }`}
               >
                 🛡️ Safe Delegatecall
@@ -536,13 +536,13 @@ export default function App() {
 
           {/* Candidate Path Selector (When Synced Contract has multiple paths, e.g. 6 paths) */}
           {contractMode === 'synced' && syncedPackage && syncedPackage.results.length > 1 && (
-            <div className="glass-panel p-3.5 rounded-2xl space-y-2.5 border border-cyan-500/30 bg-cyan-950/20">
+            <div className="glass-panel p-3.5 rounded-2xl space-y-2.5 border border-cyan-200 bg-cyan-50/70 shadow-xs">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-bold text-cyan-300 flex items-center gap-1.5">
                   <Activity className="w-3.5 h-3.5 text-cyan-400" />
                   Candidate Paths ({syncedPackage.results.length} detected)
                 </span>
-                <span className="text-[11px] text-cyan-400/80 font-mono">
+                <span className="text-[11px] text-cyan-700 font-mono">
                   Inspecting Path #{syncedPackage.activePathIndex + 1}
                 </span>
               </div>
@@ -563,12 +563,12 @@ export default function App() {
                       onClick={() => handleSelectSyncedPath(idx)}
                       className={`px-2.5 py-1.5 rounded-lg text-left text-[11px] font-mono transition-all border ${isSelected
                           ? 'bg-cyan-600 text-white border-cyan-300 font-bold shadow-md shadow-cyan-600/30 ring-1 ring-cyan-300'
-                          : 'bg-black/40 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:bg-black/60'
+                          : 'bg-white text-slate-700 border-slate-200 hover:border-cyan-300 hover:bg-cyan-50 shadow-xs'
                         }`}
                     >
                       <div className="font-bold flex items-center justify-between">
                         <span>{pathId}</span>
-                        <span className="text-[9px] uppercase px-1 rounded bg-black/30 opacity-80">{typeLabel}</span>
+                        <span className="text-[9px] uppercase px-1 rounded bg-slate-100 text-slate-700">{typeLabel}</span>
                       </div>
                       <div className="text-[10px] opacity-75 truncate">{varName}</div>
                     </button>
@@ -580,8 +580,8 @@ export default function App() {
 
           {/* Source Code View */}
           <div className="glass-panel p-4 rounded-2xl flex flex-col h-[520px]">
-            <div className="flex items-center justify-between pb-3 border-b border-white/5">
-              <span className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <span className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
                 <Terminal className="w-3.5 h-3.5 text-indigo-400" />
                 Solidity Contract Source
               </span>
@@ -597,7 +597,7 @@ export default function App() {
             <textarea
               value={sourceCode}
               onChange={(e) => setSourceCode(e.target.value)}
-              className="mt-3 flex-1 w-full bg-black/40 border border-white/5 rounded-xl p-3 font-mono text-[11px] text-slate-200 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500 leading-relaxed"
+              className="mt-3 flex-1 w-full bg-slate-100 border border-slate-200 shadow-xs rounded-xl p-3 font-mono text-[11px] text-slate-800 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500 leading-relaxed"
             />
           </div>
         </div>
@@ -608,10 +608,10 @@ export default function App() {
           <ValidationBadge validationResult={validationResult} />
 
           {/* Navigation Tabs */}
-          <div className="flex items-center gap-2 border-b border-white/10 pb-2">
+          <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
             <button
               onClick={() => setActiveTab('graph')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${activeTab === 'graph' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${activeTab === 'graph' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`}
             >
               <Activity className="w-3.5 h-3.5" />
@@ -619,7 +619,7 @@ export default function App() {
             </button>
             <button
               onClick={() => setActiveTab('simulation')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${activeTab === 'simulation' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${activeTab === 'simulation' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`}
             >
               <Play className="w-3.5 h-3.5" />
@@ -627,7 +627,7 @@ export default function App() {
             </button>
             <button
               onClick={() => setActiveTab('ai')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${activeTab === 'ai' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${activeTab === 'ai' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`}
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -638,7 +638,7 @@ export default function App() {
                 handleGenerateReport();
                 setActiveTab('report');
               }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${activeTab === 'report' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${activeTab === 'report' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`}
             >
               <FileText className="w-3.5 h-3.5" />
@@ -667,12 +667,12 @@ export default function App() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 flex-wrap">
                   <Sparkles className="w-5 h-5 text-amber-400" />
-                  <h3 className="text-base font-bold text-white">Grounded AI Analysis</h3>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30">
+                  <h3 className="text-base font-bold text-slate-900">Grounded AI Analysis</h3>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-amber-50 text-amber-700 font-semibold border border-amber-200">
                     EVIDENCE-BOUND
                   </span>
                   {aiExplanation?.model && (
-                    <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-semibold border border-indigo-500/30 flex items-center gap-1">
+                    <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-700 font-semibold border border-indigo-500/30 flex items-center gap-1">
                       <Sparkles className="w-2.5 h-2.5 text-indigo-400" />
                       {aiExplanation.model}
                     </span>
@@ -680,7 +680,7 @@ export default function App() {
                 </div>
                 <button
                   onClick={() => setShowKeyModal(true)}
-                  className="text-[11px] text-amber-400 hover:text-amber-300 underline font-medium"
+                  className="text-[11px] text-amber-700 hover:text-amber-800 underline font-medium"
                 >
                   Configure Gemini Key
                 </button>
@@ -689,17 +689,17 @@ export default function App() {
 
               {aiExplanation ? (
                 <div className="space-y-4 text-xs leading-relaxed">
-                  <div className="glass-card p-4 rounded-xl border border-white/5 space-y-1">
+                  <div className="glass-card p-4 rounded-xl border border-indigo-100 bg-indigo-50/40 space-y-1 shadow-xs">
                     <span className="font-bold text-indigo-400 uppercase tracking-wide text-[10px]">Root Cause Explanation</span>
-                    <p className="text-slate-200">{aiExplanation.explanation}</p>
+                    <p className="text-slate-800">{aiExplanation.explanation}</p>
                   </div>
-                  <div className="glass-card p-4 rounded-xl border border-red-500/20 space-y-1 bg-red-950/10">
+                  <div className="glass-card p-4 rounded-xl border border-red-200 space-y-1 bg-red-50/50 shadow-xs">
                     <span className="font-bold text-red-400 uppercase tracking-wide text-[10px]">Potential Exploit Impact</span>
-                    <p className="text-red-200">{aiExplanation.impact}</p>
+                    <p className="text-red-900">{aiExplanation.impact}</p>
                   </div>
-                  <div className="glass-card p-4 rounded-xl border border-emerald-500/20 space-y-1 bg-emerald-950/10">
+                  <div className="glass-card p-4 rounded-xl border border-emerald-200 space-y-1 bg-emerald-50/50 shadow-xs">
                     <span className="font-bold text-emerald-400 uppercase tracking-wide text-[10px]">Recommended Remediation</span>
-                    <pre className="text-emerald-200 whitespace-pre-wrap font-sans text-xs">{aiExplanation.recommendation}</pre>
+                    <pre className="text-emerald-900 whitespace-pre-wrap font-sans text-xs">{aiExplanation.recommendation}</pre>
                   </div>
                 </div>
               ) : (
@@ -714,9 +714,9 @@ export default function App() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <FileText className="w-5 h-5 text-indigo-400" />
-                  <h3 className="text-base font-bold text-white">Security Audit Report</h3>
+                  <h3 className="text-base font-bold text-slate-900">Security Audit Report</h3>
                   {geminiKeyPreview && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 flex items-center gap-1">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 font-semibold border border-amber-200 flex items-center gap-1">
                       <Sparkles className="w-2.5 h-2.5 text-amber-400" />
                       Gemini Enriched
                     </span>
@@ -738,8 +738,8 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="bg-black/50 p-4 rounded-xl border border-white/5 max-h-[480px] overflow-y-auto">
-                <pre className="text-[11px] font-mono text-slate-200 whitespace-pre-wrap leading-relaxed">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs max-h-[480px] overflow-y-auto">
+                <pre className="text-[11px] font-mono text-slate-800 whitespace-pre-wrap leading-relaxed">
                   {securityReport || 'Generating security report...'}
                 </pre>
               </div>
@@ -750,22 +750,22 @@ export default function App() {
 
       {/* Gemini API Key Configuration Modal */}
       {showKeyModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="glass-panel max-w-md w-full p-6 rounded-2xl border border-white/10 shadow-2xl space-y-4">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="glass-panel max-w-md w-full p-6 rounded-2xl border border-slate-200 shadow-xl space-y-4 bg-white">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-amber-400" />
-                <h3 className="text-base font-bold text-white">Google Gemini AI Configuration</h3>
+                <h3 className="text-base font-bold text-slate-900">Google Gemini AI Configuration</h3>
               </div>
               <button
                 onClick={() => { setShowKeyModal(false); setKeySaveMessage(null); }}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-600 hover:text-slate-900 hover:bg-slate-100"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               SmartShield uses Gemini to synthesize formal audit explanations and threat analyses grounded in EVM opcode traces and Z3 solver proofs.
             </p>
 
@@ -773,10 +773,10 @@ export default function App() {
               <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                 Current Status
               </label>
-              <div className="p-2.5 rounded-lg bg-black/40 border border-white/5 text-xs flex items-center justify-between">
+              <div className="p-2.5 rounded-lg bg-slate-100 border border-slate-200 shadow-xs text-xs flex items-center justify-between">
                 <span className="text-slate-400">API Key:</span>
                 {geminiKeyPreview ? (
-                  <span className="font-mono text-emerald-300 font-semibold flex items-center gap-1.5">
+                  <span className="font-mono text-emerald-700 font-semibold flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     Connected & Active
                   </span>
@@ -795,7 +795,7 @@ export default function App() {
                 placeholder="AIzaSy... or AQ...."
                 value={geminiKeyInput}
                 onChange={(e) => setGeminiKeyInput(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-black/60 border border-white/10 text-xs font-mono text-white focus:outline-none focus:border-amber-500"
+                className="w-full px-3 py-2 rounded-lg bg-white border border-slate-300 text-xs font-mono text-slate-900 focus:outline-none focus:border-amber-500"
               />
               <p className="text-[10px] text-slate-500">
                 Key will be saved to <code className="text-slate-400">smartshield-group2/.env</code> and activated immediately.
@@ -803,7 +803,7 @@ export default function App() {
             </div>
 
             {keySaveMessage && (
-              <div className={`p-2.5 rounded-lg text-xs font-medium ${keySaveMessage.startsWith('✓') ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-500/30' : 'bg-red-950/60 text-red-300 border border-red-500/30'}`}>
+              <div className={`p-2.5 rounded-lg text-xs font-medium ${keySaveMessage.startsWith('✓') ? 'bg-emerald-950/60 text-emerald-700 border border-emerald-500/30' : 'bg-red-950/60 text-red-300 border border-red-500/30'}`}>
                 {keySaveMessage}
               </div>
             )}
@@ -811,7 +811,7 @@ export default function App() {
             <div className="flex items-center justify-end gap-2 pt-2">
               <button
                 onClick={() => { setShowKeyModal(false); setKeySaveMessage(null); }}
-                className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-medium"
+                className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-medium"
               >
                 Cancel
               </button>
